@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -23,16 +24,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.nio.ByteOrder;
 
 public class MainActivity extends AppCompatActivity {
 
     AudioRecord recorder;
 
-    TextView statusText;
+    TextView statusText, localIP;
     EditText serverIP, serverPort;
 
     public DatagramPacket packet;
@@ -59,14 +62,24 @@ public class MainActivity extends AppCompatActivity {
         final Button buttonStart = findViewById(R.id.buttonStart);
         final Button buttonStop = findViewById(R.id.buttonStop);
         serverIP = findViewById(R.id.textServerInput);
+        serverIP.setText(DEFAULT_IP);
+
+        String ipAddress = getIpAddress();
+        Log.d("IP", "IP Address: " + ipAddress);
+        localIP = findViewById(R.id.textIpDisplay);
+        localIP.setText(ipAddress);
         serverPort = findViewById(R.id.textPortInput);
+        serverPort.setText(String.valueOf(DEFAULT_PORT));
         statusText = findViewById(R.id.textStatusUpdate);
+
 
         buttonStart.setOnClickListener( new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d("onClick","buttonStart clicked." );
                 status = true;
                 statusText.setText(R.string.statusRunning);
+                statusText.setTextColor(0xFFCC0000);
+
                 startRecording();
             }
         });
@@ -75,8 +88,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d("onClick","buttonStop clicked." );
                 status = false;
+                statusText.setTextColor(0xFF000000);
+
                 statusText.setText(R.string.statusNotRunning);
+//                statusText.setTextColor(0xFF);
+
                 recorder.release();
+
             }
         });
 
@@ -98,7 +116,10 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
             public void afterTextChanged(Editable editable) {
-                dest_port = Integer.parseInt(serverPort.getText().toString());
+                String dport = serverPort.getText().toString();
+                if (!dport.equals("")) {
+                    dest_port = Integer.parseInt(serverPort.getText().toString());
+                }
             }
         });
 
@@ -108,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
                 String sampleRate = adapterView.getItemAtPosition(i).toString();
                 MainActivity.this.sampleRate = Integer.parseInt(sampleRate);
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 sampleRate = DEFAULT_SAMPLE_RATE;
@@ -139,6 +159,28 @@ public class MainActivity extends AppCompatActivity {
             int bufferSize = AudioRecord.getMinBufferSize(rate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT);
             System.out.printf("\n%d : %d\n", rate, bufferSize);
         }
+    }
+
+    protected String getIpAddress() {
+        WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
+        int ip_addr = wifiManager.getConnectionInfo().getIpAddress();
+
+        // Convert little-endian to big-endianif needed
+        if (ByteOrder.nativeOrder().equals(ByteOrder.LITTLE_ENDIAN)) {
+            ip_addr = Integer.reverseBytes(ip_addr);
+        }
+
+        byte[] ipByteArray = BigInteger.valueOf(ip_addr).toByteArray();
+
+        String ipAddressString;
+        try {
+            ipAddressString = InetAddress.getByAddress(ipByteArray).getHostAddress();
+        } catch (UnknownHostException ex) {
+            Log.e("WIFIIP", "Unable to get host address.");
+            ipAddressString = null;
+        }
+
+        return ipAddressString;
     }
 
     public void startRecording() {

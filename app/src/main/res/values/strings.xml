@@ -2,10 +2,12 @@
     <string name="app_name">AudioLAN</string>
     <string name="start">Start</string>
     <string name="stop">Stop</string>
-    <string name="server">Server:</string>
+    <string name="server">Server: </string>
     <string name="port">Port:</string>
-    <string name="sample_rate">Sample Rate:</string>
-    <string name="status">Status:</string>
-    <string name="statusNotRunning">Not running</string>
-    <string name="statusRunning">Running</string>
+    <string name="sample_rate">Sample Rate: </string>
+    <string name="status">Status: </string>
+    <string name="statusNotRunning">Not streaming</string>
+    <string name="statusRunning">Streaming</string>
+    <string name="ip">Local IP: </string>
+
 </resources>

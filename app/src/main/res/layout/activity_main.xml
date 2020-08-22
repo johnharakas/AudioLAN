@@ -16,8 +16,8 @@
         app:layout_constraintGuide_begin="29dp" />
 
     <LinearLayout
-        android:layout_width="362dp"
-        android:layout_height="590dp"
+        android:layout_width="357dp"
+        android:layout_height="691dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,59 +26,138 @@
         app:layout_constraintTop_toTopOf="@+id/guideline"
         app:layout_constraintVertical_bias="0.621">
 
-        <TableRow
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ipAddressRow"
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <TextView
+                android:id="@+id/textIP"
+                android:layout_width="90dp"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:text="@string/ip"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textIpDisplay"
+                android:layout_width="165dp"
+                android:layout_height="45dp"
+                android:layout_marginEnd="96dp"
+                android:gravity="center_vertical"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/textIP"
+                app:layout_constraintTop_toTopOf="@+id/textIP" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/statusRow"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:paddingTop="0dp">
+
+            <TextView
+                android:id="@+id/textStatus"
+                android:layout_width="90dp"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:text="@string/status"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textStatusUpdate"
+                android:layout_width="189dp"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:text="@string/statusNotRunning"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/textStatus"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/serverRow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp">
+            android:layout_marginTop="20dp">
 
             <TextView
                 android:id="@+id/textServer"
-                android:layout_width="83dp"
-                android:layout_height="31dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="2dp"
+                android:layout_width="90dp"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
                 android:text="@string/server"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="Server:" />
 
             <EditText
                 android:id="@+id/textServerInput"
-                android:layout_width="264dp"
-                android:layout_height="wrap_content"
+                android:layout_width="165dp"
+                android:layout_height="45dp"
+                android:autofillHints=""
                 android:digits="0123456789."
                 android:ems="10"
                 android:inputType="number|numberDecimal"
+                android:imeOptions="actionDone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/textServer"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="192.168.1.165" />
 
-        </TableRow>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TableRow
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/portRow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp">
+            android:layout_marginTop="20dp">
 
             <TextView
                 android:id="@+id/textPort"
-                android:layout_width="83dp"
-                android:layout_height="29dp"
+                android:layout_width="90dp"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
                 android:text="@string/port"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="Port:" />
 
             <EditText
                 android:id="@+id/textPortInput"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
+                android:layout_width="141dp"
+                android:layout_height="45dp"
                 android:ems="10"
+                android:importantForAutofill="no"
                 android:inputType="number|numberDecimal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/textPort"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="50005" />
-        </TableRow>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/tableRow2"
+            android:id="@+id/sampleRateRow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp">
@@ -86,15 +165,18 @@
             <TextView
                 android:id="@+id/textSampleRate"
                 android:layout_width="134dp"
-                android:layout_height="33dp"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
                 android:text="@string/sample_rate"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toStartOf="@+id/sampleRateSpinner"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Spinner
                 android:id="@+id/sampleRateSpinner"
                 android:layout_width="0dp"
-                android:layout_height="33dp"
+                android:layout_height="45dp"
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textSampleRate"
@@ -102,7 +184,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/tableRow"
+            android:id="@+id/buttonRow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp">
@@ -125,35 +207,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/buttonStart"
                 app:layout_constraintTop_toBottomOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/tableRow3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:paddingTop="20dp">
-
-            <TextView
-                android:id="@+id/textStatus"
-                android:layout_width="72dp"
-                android:layout_height="40dp"
-                android:text="@string/status"
-                app:layout_constraintEnd_toStartOf="@+id/textStatusUpdate"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="7dp" />
-
-            <TextView
-                android:id="@+id/textStatusUpdate"
-                android:layout_width="189dp"
-                android:layout_height="40dp"
-                android:text="@string/statusNotRunning"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/textStatus"
-                tools:layout_editor_absoluteY="3dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
