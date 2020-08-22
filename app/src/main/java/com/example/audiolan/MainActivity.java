@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                             .build());
                     builder.setBufferSizeInBytes(2 * minBufferSize);
 
-                    AudioRecord recorder = builder.build();
+                    recorder = builder.build();
 
                     recorder.startRecording();
 
